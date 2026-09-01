@@ -10,8 +10,8 @@ function ParticleField() {
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(count * 3)
     const col = new Float32Array(count * 3)
-    const c1 = new THREE.Color('#7C5CFC')
-    const c2 = new THREE.Color('#a78bfa')
+    const c1 = new THREE.Color('#c4b5fd')
+    const c2 = new THREE.Color('#ddd6fe')
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 20
       pos[i * 3 + 1] = (Math.random() - 0.5) * 20
@@ -48,7 +48,7 @@ function FloatingTorus() {
   return (
     <mesh ref={mesh} position={[2.5, 0, -1]}>
       <torusGeometry args={[1.4, 0.4, 32, 80]} />
-      <meshStandardMaterial color="#7C5CFC" wireframe transparent opacity={0.22} />
+      <meshStandardMaterial color="#7C5CFC" wireframe transparent opacity={0.15} />
     </mesh>
   )
 }
@@ -63,7 +63,7 @@ function FloatingSphere() {
   return (
     <mesh ref={mesh} position={[-2.8, 0.5, -2]}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshStandardMaterial color="#a78bfa" wireframe transparent opacity={0.18} />
+      <meshStandardMaterial color="#a78bfa" wireframe transparent opacity={0.12} />
     </mesh>
   )
 }
@@ -112,8 +112,8 @@ export default function Hero() {
       <div className="hero-canvas">
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }} dpr={[1, 1.5]}>
           <ambientLight intensity={0.8} />
-      <pointLight position={[5, 5, 5]} intensity={0.5} color="#a78bfa" />
-          <pointLight position={[-5, -5, 5]} intensity={0.3} color="#7C5CFC" />
+      <pointLight position={[5, 5, 5]} intensity={0.5} color="#c4b5fd" />
+          <pointLight position={[-5, -5, 5]} intensity={0.3} color="#ede9fe" />
           <ParticleField />
           <FloatingTorus />
           <FloatingSphere />

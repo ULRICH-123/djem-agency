@@ -91,11 +91,11 @@ function DjemsScene() {
     <group ref={group}>
       <mesh>
         <torusKnotGeometry args={[0.9, 0.28, 128, 16]} />
-        <meshStandardMaterial color="#222222" metalness={0.7} roughness={0.2} />
+        <meshStandardMaterial color="#7C5CFC" metalness={0.5} roughness={0.3} />
       </mesh>
       <mesh>
         <torusKnotGeometry args={[0.9, 0.28, 128, 16]} />
-        <meshStandardMaterial color="#000000" wireframe transparent opacity={0.1} />
+        <meshStandardMaterial color="#5b3fd4" wireframe transparent opacity={0.12} />
       </mesh>
     </group>
   )
@@ -134,9 +134,9 @@ export default function Products() {
           <div className="product-card" style={{ opacity: 0 }}>
             <div className="product-canvas">
               <Canvas camera={{ position: [0, 0, 5], fov: 50 }} dpr={[1, 1.5]}>
-                <ambientLight intensity={0.7} />
-                <pointLight position={[3, 3, 3]} intensity={1.5} color="#a78bfa" />
-                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#7C5CFC" />
+                <ambientLight intensity={1.2} />
+                <pointLight position={[3, 3, 3]} intensity={1} color="#7C5CFC" />
+                <pointLight position={[-3, -3, 3]} intensity={0.5} color="#c4b5fd" />
                 <KonsultaScene />
               </Canvas>
             </div>
@@ -163,9 +163,9 @@ export default function Products() {
           <div className="product-card product-card--pharmacy" style={{ opacity: 0 }}>
             <div className="product-canvas">
               <Canvas camera={{ position: [0, 0, 4.5], fov: 50 }} dpr={[1, 1.5]}>
-                <ambientLight intensity={0.8} />
-                <pointLight position={[3, 3, 3]} intensity={1.5} color="#00DC82" />
-                <pointLight position={[-3, -3, 3]} intensity={0.6} color="#a78bfa" />
+                <ambientLight intensity={1.2} />
+                <pointLight position={[3, 3, 3]} intensity={1} color="#00DC82" />
+                <pointLight position={[-3, -3, 3]} intensity={0.5} color="#7C5CFC" />
                 <PharmacyScene />
               </Canvas>
             </div>
@@ -193,9 +193,9 @@ export default function Products() {
           <div className="product-card product-card--alt" style={{ opacity: 0 }}>
             <div className="product-canvas">
               <Canvas camera={{ position: [0, 0, 4], fov: 50 }} dpr={[1, 1.5]}>
-                <ambientLight intensity={0.7} />
-                <pointLight position={[3, 3, 3]} intensity={1.5} color="#a78bfa" />
-                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#7C5CFC" />
+                <ambientLight intensity={1.2} />
+                <pointLight position={[3, 3, 3]} intensity={1} color="#7C5CFC" />
+                <pointLight position={[-3, -3, 3]} intensity={0.5} color="#c4b5fd" />
                 <DjemsScene />
               </Canvas>
             </div>

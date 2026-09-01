@@ -34,18 +34,18 @@
 }
 
 .product-card:hover {
-  border-color: rgba(124,92,252,0.3);
+  border-color: rgba(124,92,252,0.25);
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(124,92,252,0.1);
+  box-shadow: 0 16px 48px rgba(124,92,252,0.08);
 }
 
 .product-canvas {
   height: 260px;
-  background: #13131c;
+  background: #f3f0ff;
 }
 
-.product-card--alt .product-canvas { background: #111119; }
-.product-card--pharmacy .product-canvas { background: #0a1510; }
+.product-card--alt .product-canvas { background: #f5f3ff; }
+.product-card--pharmacy .product-canvas { background: #f0faf5; }
 
 .product-canvas canvas { width: 100% !important; height: 100% !important; }
 

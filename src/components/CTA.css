@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: #0a0a0a;
+  background: #08080f;
 }
 
 .cta-canvas {
@@ -18,7 +18,7 @@
 .cta-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, #0a0a0a 80%);
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(124,92,252,0.08) 0%, #08080f 75%);
   z-index: 1;
   pointer-events: none;
 }
@@ -54,11 +54,11 @@
 .cta-btn {
   display: inline-block;
   font-size: 1rem;
-  background: #ffffff !important;
-  color: #0a0a0a !important;
-  box-shadow: 0 4px 24px rgba(255,255,255,0.15) !important;
+  background: var(--accent) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 32px var(--accent-glow) !important;
 }
 
 .cta-btn:hover {
-  box-shadow: 0 8px 40px rgba(255,255,255,0.25) !important;
+  box-shadow: 0 8px 48px rgba(124,92,252,0.5) !important;
 }

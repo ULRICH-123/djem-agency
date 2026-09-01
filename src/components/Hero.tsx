@@ -10,8 +10,8 @@ function ParticleField() {
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(count * 3)
     const col = new Float32Array(count * 3)
-    const c1 = new THREE.Color('#111111')
-    const c2 = new THREE.Color('#888888')
+    const c1 = new THREE.Color('#7C5CFC')
+    const c2 = new THREE.Color('#a78bfa')
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 20
       pos[i * 3 + 1] = (Math.random() - 0.5) * 20
@@ -48,7 +48,7 @@ function FloatingTorus() {
   return (
     <mesh ref={mesh} position={[2.5, 0, -1]}>
       <torusGeometry args={[1.4, 0.4, 32, 80]} />
-      <meshStandardMaterial color="#222222" wireframe transparent opacity={0.18} />
+      <meshStandardMaterial color="#7C5CFC" wireframe transparent opacity={0.22} />
     </mesh>
   )
 }
@@ -63,7 +63,7 @@ function FloatingSphere() {
   return (
     <mesh ref={mesh} position={[-2.8, 0.5, -2]}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshStandardMaterial color="#555555" wireframe transparent opacity={0.15} />
+      <meshStandardMaterial color="#a78bfa" wireframe transparent opacity={0.18} />
     </mesh>
   )
 }
@@ -112,8 +112,8 @@ export default function Hero() {
       <div className="hero-canvas">
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }} dpr={[1, 1.5]}>
           <ambientLight intensity={0.8} />
-          <pointLight position={[5, 5, 5]} intensity={0.5} color="#ffffff" />
-          <pointLight position={[-5, -5, 5]} intensity={0.3} color="#cccccc" />
+      <pointLight position={[5, 5, 5]} intensity={0.5} color="#a78bfa" />
+          <pointLight position={[-5, -5, 5]} intensity={0.3} color="#7C5CFC" />
           <ParticleField />
           <FloatingTorus />
           <FloatingSphere />
@@ -123,7 +123,7 @@ export default function Hero() {
 
       <div className="hero-content container">
         <h1 ref={titleRef} className="hero-title" style={{ opacity: 0 }}>
-          Nous créons les solutions digitales qui font avancer les entreprises.
+          Nous créons les <span>solutions digitales</span> qui font avancer les entreprises.
         </h1>
         <p ref={subtitleRef} className="hero-subtitle" style={{ opacity: 0 }}>
           Sites web modernes, applications web et communication digitale : nous transformons vos idées en produits numériques performants.

@@ -21,7 +21,7 @@
   position: relative;
 }
 
-.service-card:hover { background: var(--surface); }
+.service-card:hover { background: var(--surface-2); }
 
 .service-header {
   display: flex;

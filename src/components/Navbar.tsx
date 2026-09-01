@@ -77,10 +77,6 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div ref={menuRef} className="navbar-mobile" style={{ display: 'none' }}>
         <div className="mobile-top">
-          <a href="#" className="navbar-logo" onClick={close}>
-            <span className="logo-dot" />
-            Djem's Agency
-          </a>
           <button className="mobile-close" onClick={close} aria-label="Fermer">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M2 2L18 18M18 2L2 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>

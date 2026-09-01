@@ -109,6 +109,12 @@ export default function Navbar() {
           <a href="#cta" className="btn-primary mobile-cta-btn" onClick={close}>
             Démarrer un projet
           </a>
+          <a href="tel:+237686618240" className="mobile-phone">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 1h3l1.5 4L6 6.5c1 2 2.5 3.5 4.5 4.5L12 9.5l4 1.5v3a1 1 0 01-1 1C6.16 15 1 9.84 1 2a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            +237 686 618 240
+          </a>
           <p className="mobile-tagline">Transformons votre idée en produit.</p>
         </div>
       </div>

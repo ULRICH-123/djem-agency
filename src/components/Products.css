@@ -21,7 +21,7 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -40,11 +40,12 @@
 }
 
 .product-canvas {
-  height: 320px;
+  height: 260px;
   background: #13131c;
 }
 
 .product-card--alt .product-canvas { background: #111119; }
+.product-card--pharmacy .product-canvas { background: #0a1510; }
 
 .product-canvas canvas { width: 100% !important; height: 100% !important; }
 
@@ -103,6 +104,16 @@
   gap: 12px;
 }
 
+.product-tag--green {
+  background: rgba(0,220,130,0.1);
+  color: #00DC82;
+  border-color: rgba(0,220,130,0.2);
+}
+
+.product-name-sub {
+  color: #00DC82;
+}
+
 .product-url {
   font-size: 0.8rem;
   color: var(--text-dim);
@@ -118,6 +129,10 @@
 
 .product-cta:hover { opacity: 0.5; }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
   .products-grid { grid-template-columns: 1fr; }
 }

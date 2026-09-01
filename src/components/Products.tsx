@@ -36,6 +36,49 @@ function KonsultaScene() {
   )
 }
 
+function PharmacyScene() {
+  const group = useRef<THREE.Group>(null)
+  const pillsRef = useRef<THREE.Group>(null)
+  useFrame(({ clock, mouse }) => {
+    if (!group.current) return
+    group.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.4) * 0.25 + mouse.x * 0.08
+    group.current.rotation.x = mouse.y * 0.04
+    group.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.12
+    if (pillsRef.current) pillsRef.current.rotation.y = clock.getElapsedTime() * 0.6
+  })
+  const pillPositions: [number, number, number, number][] = [
+    [0.9, 0.5, 0.3, 0], [-0.9, -0.4, 0.2, 1.2], [0.6, -0.8, 0.4, 0.8],
+    [-0.5, 0.9, 0.1, 2.1], [1.1, -0.1, 0.2, 1.6],
+  ]
+  return (
+    <group ref={group}>
+      {/* Cross */}
+      <mesh position={[0, 0.4, 0]}>
+        <boxGeometry args={[0.28, 1.1, 0.18]} />
+        <meshStandardMaterial color="#00DC82" metalness={0.3} roughness={0.4} />
+      </mesh>
+      <mesh position={[0, 0.4, 0]}>
+        <boxGeometry args={[1.1, 0.28, 0.18]} />
+        <meshStandardMaterial color="#00DC82" metalness={0.3} roughness={0.4} />
+      </mesh>
+      {/* Pills */}
+      <group ref={pillsRef}>
+        {pillPositions.map(([x, y, z, r], i) => (
+          <mesh key={i} position={[x, y, z]} rotation={[r, 0, r * 0.5]}>
+            <capsuleGeometry args={[0.1, 0.22, 8, 16]} />
+            <meshStandardMaterial color={i % 2 === 0 ? '#a78bfa' : '#00DC82'} metalness={0.2} roughness={0.5} />
+          </mesh>
+        ))}
+      </group>
+      {/* Base ring */}
+      <mesh position={[0, -1.1, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.9, 0.04, 16, 60]} />
+        <meshStandardMaterial color="#00DC82" transparent opacity={0.3} />
+      </mesh>
+    </group>
+  )
+}
+
 function DjemsScene() {
   const group = useRef<THREE.Group>(null)
   useFrame(({ clock, mouse }) => {
@@ -92,8 +135,8 @@ export default function Products() {
             <div className="product-canvas">
               <Canvas camera={{ position: [0, 0, 5], fov: 50 }} dpr={[1, 1.5]}>
                 <ambientLight intensity={0.7} />
-                <pointLight position={[3, 3, 3]} intensity={1.5} color="#ffffff" />
-                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#eeeeee" />
+                <pointLight position={[3, 3, 3]} intensity={1.5} color="#a78bfa" />
+                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#7C5CFC" />
                 <KonsultaScene />
               </Canvas>
             </div>
@@ -111,7 +154,37 @@ export default function Products() {
               <div className="product-footer">
                 <span className="product-url">konsulta-cameroun.com</span>
                 <a href="https://konsulta-cameroun.com" target="_blank" rel="noopener" className="product-cta">
-                  Découvrir Konsulta →
+                  Découvrir →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="product-card product-card--pharmacy" style={{ opacity: 0 }}>
+            <div className="product-canvas">
+              <Canvas camera={{ position: [0, 0, 4.5], fov: 50 }} dpr={[1, 1.5]}>
+                <ambientLight intensity={0.8} />
+                <pointLight position={[3, 3, 3]} intensity={1.5} color="#00DC82" />
+                <pointLight position={[-3, -3, 3]} intensity={0.6} color="#a78bfa" />
+                <PharmacyScene />
+              </Canvas>
+            </div>
+            <div className="product-info">
+              <div className="product-tag product-tag--green">Pharmacie digitale</div>
+              <h3 className="product-name">KONSULTA <span className="product-name-sub">Pharmacy</span></h3>
+              <p className="product-desc">
+                Gérez votre pharmacie plus facilement, vendez plus rapidement et ne perdez plus le contrôle de votre stock. Konsulta Pharmacy centralise ventes, inventaire et ordonnances en une seule interface pensée pour les pharmaciens.
+              </p>
+              <div className="product-features">
+                <span>Gestion de stock</span>
+                <span>Vente rapide</span>
+                <span>Ordonnances</span>
+                <span>Tableau de bord</span>
+              </div>
+              <div className="product-footer">
+                <span className="product-url">konsulta-cameroun.com/pharmacy</span>
+                <a href="https://konsulta-cameroun.com" target="_blank" rel="noopener" className="product-cta">
+                  Découvrir →
                 </a>
               </div>
             </div>
@@ -121,8 +194,8 @@ export default function Products() {
             <div className="product-canvas">
               <Canvas camera={{ position: [0, 0, 4], fov: 50 }} dpr={[1, 1.5]}>
                 <ambientLight intensity={0.7} />
-                <pointLight position={[3, 3, 3]} intensity={1.5} color="#ffffff" />
-                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#eeeeee" />
+                <pointLight position={[3, 3, 3]} intensity={1.5} color="#a78bfa" />
+                <pointLight position={[-3, -3, 3]} intensity={0.8} color="#7C5CFC" />
                 <DjemsScene />
               </Canvas>
             </div>
@@ -130,7 +203,7 @@ export default function Products() {
               <div className="product-tag">Logement & Services</div>
               <h3 className="product-name">DJEM'S</h3>
               <p className="product-desc">
-                La plateforme qui simplifie la recherche de logement et de services à domicile au Cameroun. Trouvez des appartements meublés ou non meublés, et accédez à des prestataires qualifiés pour vos besoins du quotidien — plomberie, ménage, électricité, livraison et bien plus.
+                La plateforme qui simplifie la recherche de logement et de services à domicile au Cameroun. Trouvez des appartements meublés ou non meublés, et accédez à des prestataires qualifiés pour vos besoins du quotidien.
               </p>
               <div className="product-features">
                 <span>Logements meublés & non meublés</span>
@@ -140,7 +213,7 @@ export default function Products() {
               <div className="product-footer">
                 <span className="product-url">djem-s.site</span>
                 <a href="https://djem-s.site" target="_blank" rel="noopener" className="product-cta">
-                  Découvrir Djem's →
+                  Découvrir →
                 </a>
               </div>
             </div>

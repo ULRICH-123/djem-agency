@@ -6,6 +6,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const linksRef = useRef<HTMLLIElement[]>([])
+
+  const links = [
+    { label: 'Produits', href: '#products' },
+    { label: 'Services', href: '#services' },
+    { label: 'Approche', href: '#approach' },
+    { label: 'Technologies', href: '#technologies' },
+  ]
 
   useEffect(() => {
     gsap.fromTo(navRef.current,
@@ -17,12 +26,27 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const links = [
-    { label: 'Produits', href: '#products' },
-    { label: 'Services', href: '#services' },
-    { label: 'Approche', href: '#approach' },
-    { label: 'Technologies', href: '#technologies' },
-  ]
+  useEffect(() => {
+    const menu = menuRef.current
+    if (!menu) return
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      gsap.set(menu, { display: 'flex' })
+      gsap.fromTo(menu, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+      gsap.fromTo(linksRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.07, delay: 0.1 }
+      )
+    } else {
+      document.body.style.overflow = ''
+      gsap.to(menu, {
+        opacity: 0, duration: 0.25, ease: 'power2.in',
+        onComplete: () => gsap.set(menu, { display: 'none' })
+      })
+    }
+  }, [open])
+
+  const close = () => setOpen(false)
 
   return (
     <nav ref={navRef} className={`navbar${scrolled ? ' scrolled' : ''}`} style={{ opacity: 0 }}>
@@ -32,23 +56,61 @@ export default function Navbar() {
           Djem's Agency
         </a>
 
-        <ul className={`navbar-links${open ? ' open' : ''}`}>
+        <ul className="navbar-links-desktop">
           {links.map(l => (
-            <li key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
-            </li>
+            <li key={l.href}><a href={l.href}>{l.label}</a></li>
           ))}
           <li>
-            <a href="#cta" className="navbar-cta" onClick={() => setOpen(false)}>
-              Démarrer un projet
-            </a>
+            <a href="#cta" className="navbar-cta">Démarrer un projet</a>
           </li>
         </ul>
 
-        <button className="navbar-burger" onClick={() => setOpen(o => !o)} aria-label="Menu">
-          <span className={open ? 'open' : ''} />
-          <span className={open ? 'open' : ''} />
+        <button
+          className={`navbar-burger${open ? ' is-open' : ''}`}
+          onClick={() => setOpen(o => !o)}
+          aria-label="Menu"
+        >
+          <span /><span /><span />
         </button>
+      </div>
+
+      {/* Mobile menu */}
+      <div ref={menuRef} className="navbar-mobile" style={{ display: 'none' }}>
+        <div className="mobile-top">
+          <a href="#" className="navbar-logo" onClick={close}>
+            <span className="logo-dot" />
+            Djem's Agency
+          </a>
+          <button className="mobile-close" onClick={close} aria-label="Fermer">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M2 2L18 18M18 2L2 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <ul className="mobile-links">
+          {links.map((l, i) => (
+            <li key={l.href} ref={el => { if (el) linksRef.current[i] = el }}>
+              <a href={l.href} onClick={close}>
+                <span className="mobile-link-num">0{i + 1}</span>
+                {l.label}
+                <svg className="mobile-link-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div
+          className="mobile-cta-wrap"
+          ref={el => { if (el) linksRef.current[links.length] = el as unknown as HTMLLIElement }}
+        >
+          <a href="#cta" className="btn-primary mobile-cta-btn" onClick={close}>
+            Démarrer un projet
+          </a>
+          <p className="mobile-tagline">Transformons votre idée en produit.</p>
+        </div>
       </div>
     </nav>
   )

@@ -33,10 +33,10 @@ export default function ProjectModal({ open, onClose }: Props) {
     setStatus('sending')
     try {
       await emailjs.sendForm(
-        'service_djems',
-        'template_djems',
+        'service_274g7bn',
+        'template_2moltlt',
         formRef.current!,
-        'YOUR_PUBLIC_KEY'
+        'lZZmz7JlZej_Q-AUi'
       )
       setStatus('success')
       setForm({ name: '', email: '', phone: '', service: '', message: '' })

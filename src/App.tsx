@@ -9,6 +9,7 @@ import Technologies from './components/Technologies'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import WhatsApp from './components/WhatsApp'
+import CookieBanner from './components/CookieBanner'
 
 export default function App() {
   useLenis()
@@ -24,6 +25,7 @@ export default function App() {
       <CTA />
       <Footer />
       <WhatsApp />
+      <CookieBanner />
     </>
   )
 }

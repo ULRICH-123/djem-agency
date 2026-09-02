@@ -2,6 +2,7 @@ import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { motion, useInView } from 'framer-motion'
 import * as THREE from 'three'
+import { useModal } from '../lib/modalContext'
 import './CTA.css'
 
 function CTAScene() {
@@ -66,6 +67,7 @@ function CTAScene() {
 export default function CTA() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { openModal } = useModal()
 
   return (
     <section className="cta-section" id="cta" ref={ref}>
@@ -107,15 +109,15 @@ export default function CTA() {
           Parlons de votre projet et construisons ensemble une solution digitale moderne, performante et adaptée à vos objectifs.
         </motion.p>
 
-        <motion.a
-          href="mailto:djieritechnology@gmail.com"
+        <motion.button
+          onClick={openModal}
           className="btn-primary cta-btn"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           Démarrer un projet →
-        </motion.a>
+        </motion.button>
       </div>
     </section>
   )

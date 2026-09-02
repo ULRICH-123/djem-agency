@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { gsap } from '../lib/gsap'
+import { useModal } from '../lib/modalContext'
 import './Navbar.css'
 
 const links = [
@@ -16,6 +17,7 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const linksRef = useRef<HTMLLIElement[]>([])
+  const { openModal } = useModal()
 
   useEffect(() => {
     gsap.fromTo(navRef.current,
@@ -78,7 +80,7 @@ export default function Navbar() {
       </ul>
 
       <div className="mobile-cta-wrap" ref={el => { if (el) linksRef.current[links.length] = el as unknown as HTMLLIElement }}>
-        <a href="#cta" className="btn-primary mobile-cta-btn" onClick={close}>
+        <a href="#" className="btn-primary mobile-cta-btn" onClick={e => { e.preventDefault(); close(); openModal() }}>
           Démarrer un projet
         </a>
         <a href="tel:+237686618240" className="mobile-phone">
@@ -106,7 +108,7 @@ export default function Navbar() {
               <li key={l.href}><a href={l.href}>{l.label}</a></li>
             ))}
             <li>
-              <a href="#cta" className="navbar-cta">Démarrer un projet</a>
+              <a href="#" className="navbar-cta" onClick={e => { e.preventDefault(); openModal() }}>Démarrer un projet</a>
             </li>
           </ul>
 

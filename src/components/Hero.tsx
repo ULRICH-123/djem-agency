@@ -2,6 +2,7 @@ import { useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { gsap } from '../lib/gsap'
 import * as THREE from 'three'
+import { useModal } from '../lib/modalContext'
 import './Hero.css'
 
 function ParticleField() {
@@ -83,6 +84,7 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const actionsRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { openModal } = useModal()
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.3 })
@@ -129,7 +131,7 @@ export default function Hero() {
           Sites web modernes, applications web et communication digitale : nous transformons vos idées en produits numériques performants.
         </p>
         <div ref={actionsRef} className="hero-actions" style={{ opacity: 0 }}>
-          <a href="#cta" className="btn-primary">Démarrer un projet</a>
+          <button onClick={openModal} className="btn-primary">Démarrer un projet</button>
           <a href="#products" className="btn-ghost">Découvrir nos produits</a>
         </div>
         <div ref={scrollRef} className="hero-scroll" style={{ opacity: 0 }}>
